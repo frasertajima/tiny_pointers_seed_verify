@@ -391,32 +391,9 @@ Ranked by payoff, leading with the case that maximises $C_v / w$:
 - **Bioinformatics** — BLAST is seed-and-verify; shown in `kmerstash`.
 - **Cross-encoder reranking, threat-intel / log triage** — cheap retrieve, expensive verify.
 
-## 8. Usage
+## 8. Files
 
-```bash
-make            # build (pure Rust, std-only, no crates)
-make demo       # run both experiments
-make bench      # the experiment CSVs
-make test       # unit tests
-make run-notebook   # build + execute seedverify_demo.ipynb end-to-end
-```
-
-E1 knobs: `--corpus N` (`N`), `--vocab`, `--doclen`, `--queries`, `--keep`/`--noise`
-(query overlap with its target), `--budget B`, `--dfcap-frac` (the `frac` in §5.2),
-`--works` (comma-separated verify-cost knob values), `--seed`.
-E2 knobs: `--records N`, `--queries`, `--edits` (typos per query), `--budget`,
-`--dfcap-frac`, `--seed`. The binary prints CSV to stdout and diagnostics to stderr.
-
-## 9. Files
-
-| File | Role |
-|---|---|
-| `src/index.rs` | the generic IDF token inverted index; `candidates()` returns the shortlist **and** `seed_walked` (the §5.2 term) |
-| `src/verify.rs` | the exact ops: `spin` (tunable $C_v$), `jaccard_sorted`, `levenshtein` |
-| `src/data.rs` | std-only xorshift RNG + synthetic corpus / queries / typo'd records / char-trigram tokenizer |
-| `src/main.rs` | CLI: `bench --kind cost-sweep \| linkage`, `demo` |
-| `build_notebook.py` | generates `seedverify_demo.ipynb` (the plotted version of §4) |
-| `PLAN.md` | the thesis, the fit test, and the E1/E2/E3 roadmap |
+Later notebooks rely on COBOLMM datasets so rather than build the expectation that the user can replicate these results, the documents in this lab are for information only, not to re-run.
 
 **Honest scope.** The data is synthetic on purpose: the thesis (§3) is about the
 *economics* of seed-and-verify — how an operation-count saving converts to wall-clock as
